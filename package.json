@@ -1,1 +1,39 @@
-{     "devDependencies": {         "gulp-useref": "*",         "electron-lite": "kaizhu256/node-electron-lite#alpha",         "utility2": "kaizhu256/node-utility2#alpha"     },     "name":"npmdoc-gulp-useref",     "homepage": "https://github.com/npmdoc/node-npmdoc-gulp-useref",     "repository": {         "type": "git",         "url": "https://github.com/npmdoc/node-npmdoc-gulp-useref.git"     },     "scripts": {         "build-ci": "utility2 shReadmeTest build_ci.sh"     },     "version": "0.0.1" }
+{
+    "author": "kai zhu <kaizhu256@gmail.com>",
+    "description": "#### api documentation for  [gulp-useref (v3.1.2)](https://github.com/jonkemp/gulp-useref#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-useref.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-useref) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-useref.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-useref)",
+    "devDependencies": {
+        "electron-lite": "kaizhu256/node-electron-lite#alpha",
+        "gulp-useref": "*",
+        "utility2": "kaizhu256/node-utility2#alpha"
+    },
+    "engines": {
+        "node": ">=4.0"
+    },
+    "homepage": "https://github.com/npmdoc/node-npmdoc-gulp-useref",
+    "keywords": [
+        "documentation",
+        "gulp-useref"
+    ],
+    "license": "MIT",
+    "main": "lib.npmdoc_gulp_useref.js",
+    "name": "npmdoc-gulp-useref",
+    "nameAlias": "npmdoc_gulp_useref",
+    "nameOriginal": "npmdoc-gulp-useref",
+    "os": [
+        "darwin",
+        "linux"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/npmdoc/node-npmdoc-gulp-useref.git"
+    },
+    "scripts": {
+        "build-ci": "utility2 shReadmeTest build_ci.sh",
+        "env": "env",
+        "heroku-postbuild": "npm install \"kaizhu256/node-utility2#alpha\" && utility2 shDeployHeroku",
+        "postinstall": "[ ! -f npm_scripts.sh ] || ./npm_scripts.sh postinstall",
+        "start": "PORT=${PORT:-8080} utility2 start test.js",
+        "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
+    },
+    "version": "0.0.6"
+}
