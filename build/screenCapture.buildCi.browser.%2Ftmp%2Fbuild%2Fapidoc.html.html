@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/jonkemp/gulp-useref#readme"
-
-    >gulp-useref (v3.1.2)</a>
+    <a href="https://github.com/jonkemp/gulp-useref#readme">gulp-useref (v3.1.2)</a>
 </h1>
 <h4>Parse build blocks in HTML files to replace references to non-optimized scripts or stylesheets.</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.gulp-useref">module gulp-useref</a><ol>
 
@@ -119,7 +112,7 @@
             }
 
             if (file.isStream()) {
-                return cb(new gutil.PluginError(&#x27;gulp-useref&#x27;, &#x27;Streaming not supported&#x27;));
+                return cb(new gutil.PluginError('gulp-useref', 'Streaming not supported'));
             }
 
             output = useref(file.contents.toString(), opts);
@@ -134,9 +127,9 @@
         }));
 
         // If no external streams were included,
-        // emit &#x27;end&#x27; on the empty stream
+        // emit 'end' on the empty stream
         if (!additionalStreams) {
-            waitForAssets.emit(&#x27;end&#x27;);
+            waitForAssets.emit('end');
         }
     }, function (cb) {
         var unprocessed = unprocessedCounter.get(),
@@ -163,3 +156,4 @@
     ]
 </div>
 </div>
+</body></html>

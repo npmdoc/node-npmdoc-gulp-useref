@@ -61,12 +61,99 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.gulp-useref">module gulp-useref</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-useref.gulp-useref">
+            function <span class="apidocSignatureSpan"></span>gulp-useref
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.gulp-useref" id="apidoc.module.gulp-useref">module gulp-useref</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-useref.gulp-useref" id="apidoc.element.gulp-useref.gulp-useref">
+        function <span class="apidocSignatureSpan"></span>gulp-useref
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">gulp-useref = function (options) {
+    var opts = options || {},
+        waitForAssets,
+        additionalStreams;
+
+    pluginOptions = opts;
+    transforms = Array.prototype.slice.call(arguments, 1);
+
+    // If any external streams were included, add matched files to src
+    if (opts.additionalStreams) {
+        additionalStreams = handleAdditionalStreams(opts.additionalStreams);
+
+        // If we have additional streams, wait for them to run before continuing
+        waitForAssets = es.merge(additionalStreams).pipe(through.obj());
+    } else {
+        // Else, create a fake stream
+        waitForAssets = through.obj();
+    }
+
+    return through.obj(function (file, enc, cb) {
+        var self = this;
+
+        waitForAssets.pipe(es.wait(function () {
+            var output,
+
+                // Cache the file base path relative to the cwd
+                // Use later when it could be dropped
+                _basePath = path.dirname(file.path);
+
+            if (file.isNull()) {
+                return cb(null, file);
+            }
+
+            if (file.isStream()) {
+                return cb(new gutil.PluginError(&#x27;gulp-useref&#x27;, &#x27;Streaming not supported&#x27;));
+            }
+
+            output = useref(file.contents.toString(), opts);
+
+            addHtmlToStream.call(self, file, output[0]);
+
+            if (!opts.noAssets) {
+                processAssets.call(self, file, _basePath, output[1]);
+            }
+
+            return cb();
+        }));
+
+        // If no external streams were included,
+        // emit &#x27;end&#x27; on the empty stream
+        if (!additionalStreams) {
+            waitForAssets.emit(&#x27;end&#x27;);
+        }
+    }, function (cb) {
+        var unprocessed = unprocessedCounter.get(),
+            fn = function () {};
+
+        end.set(cb);
+
+        if (unprocessed === 0) {
+            fn = cb;
+        }
+
+        return fn();
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 
